@@ -30,8 +30,18 @@ Commands:
 		return
 	}
 
+	// tuanpa - fix to be able to set the rootdir as 2nd param when start
+	// eg.,: tendermint node /path/to/rootdir
+	var rootDir string = ""
+
+	if len(args) > 1 {
+		rootDir = args[1]
+	}
+
+	fmt.Println("tmRoot:", rootDir)
+
 	// Get configuration
-	config = tmcfg.GetConfig("")
+	config = tmcfg.GetConfig(rootDir)
 	parseFlags(config, args[1:]) // Command line overrides
 
 	// set the log level
